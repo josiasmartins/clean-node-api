@@ -35,6 +35,7 @@ describe('', () => {
     const httpRequest = {
       body: {
         name: 'any_name',
+        email: 'any_email@gmail.com',
         passwordConfirmation: 'any_password'
       }
     }
@@ -48,6 +49,7 @@ describe('', () => {
     const httpRequest = {
       body: {
         name: 'any_name',
+        email: 'any_email@gmail.com',
         password: 'any_password'
       }
     }
