@@ -11,7 +11,8 @@ export class SignUpController implements Controller {
     emailValidator: EmailValidator,
     addAccount: AddAccount
   ) {
-    this.emailValidator = emailValidator
+    this.emailValidator = emailValidator;
+    this.addAccount = addAccount
   }
 
   handle (httpRequest: HttpRequest): HttpResponse {
