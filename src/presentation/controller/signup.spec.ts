@@ -2,11 +2,14 @@ import { SignUpController } from './signup'
 import { EmailValidator } from '../protocols';
 import { MissingParamError, ServerError } from '../errors';
 import { InvalidParamError } from '../errors/invalid-param-error';
+import { AddAccount, AddAccountModel } from '../../domain/usecases/add-account';
+import { AccountModel } from '../../domain/model/account';
 
 
 interface SubTypes {
   sut: SignUpController,
-  emailValidatorStub: EmailValidator
+  emailValidatorStub: EmailValidator,
+  addAccountStub: AddAccount
 }
 
 const makeEmailValidator = (): EmailValidator => {
@@ -37,10 +40,12 @@ const makeAddAccount = (): AddAccount => {
 
 const makeSut = (): SubTypes => {
   const emailValidatorStub = makeEmailValidator();
-  const sut = new SignUpController(emailValidatorStub);
+  const addAccountStub = makeAddAccount()
+  const sut = new SignUpController(emailValidatorStub, addAccountStub);
   return {
     sut,
-    emailValidatorStub
+    emailValidatorStub,
+    addAccountStub
   }
 }
 
