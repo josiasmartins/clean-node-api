@@ -8,13 +8,28 @@ interface SubTypes {
   emailValidatorStub: EmailValidator
 }
 
-const makeSut = (): SubTypes => {
+const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub {
     isValid (email: string): boolean {
       return true
     }
   }
-  const emailValidatorStub = new EmailValidatorStub();
+
+  return new EmailValidatorStub()
+}
+
+const makeEmailValidatorWithError = (): EmailValidator => {
+  class EmailValidatorStub {
+    isValid (email: string): boolean {
+      throw new Error()
+    }
+  }
+
+  return new EmailValidatorStub()
+}
+
+const makeSut = (): SubTypes => {
+  const emailValidatorStub = makeEmailValidator();
   const sut = new SignUpController(emailValidatorStub);
   return {
     sut,
@@ -94,14 +109,8 @@ describe('', () => {
     expect(isValidSpy).toHaveBeenCalledWith('invalid_email@gmail.com')
   });
 
-  test('should return 500 if no EmailValidator is throws', () => {
-    // const { sut } = makeSut()
-    class EmailValidatorStub {
-      isValid (email: string): boolean {
-        return false
-      }
-    }
-    const emailValidatorStub = new EmailValidatorStub();
+  test('should return 500 if no EmailValidator throws', () => {
+    const emailValidatorStub = makeEmailValidatorWithError();
     const sut = new SignUpController(emailValidatorStub)
     const httpRequest = {
       body: {
