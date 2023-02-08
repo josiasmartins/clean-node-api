@@ -3,7 +3,7 @@
     "parserOptions": {
         "project": "./tsconfig.json"
     },
-    "role": {
-        "@typescript-eslint/strict-boolean-expressions": "off"
-    }
+    // "role": {
+    //     "@typescript-eslint/strict-boolean-expressions": "off"
+    // }
 }
