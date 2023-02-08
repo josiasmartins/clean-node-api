@@ -1,6 +1,7 @@
 import { SignUpController } from './signup'
 import { EmailValidator } from '../protocols';
 import { MissingParamError, ServerError } from '../errors';
+import { InvalidParamError } from '../errors/invalid-param-error';
 
 
 interface SubTypes {
@@ -115,6 +116,21 @@ describe('', () => {
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError())
+  });
+
+  test('should return 400 if an password confirmation is fails', () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'invalid_email@gmail.com',
+        password: 'any_password',
+        passwordConfirmation: 'invalid_password'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new InvalidParamError('passwordConfirmation'))
   });
 
 })
