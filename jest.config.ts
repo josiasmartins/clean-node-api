@@ -3,30 +3,30 @@
  * https://jestjs.io/docs/configuration
  */
 
-// module.exports = {
-//   root: ['<rootDir>/src'],
-//   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
-//   coverageDirectory: 'coverage',
-//   testEnvironment: 'node',
-//   preset: '@shelf/jest-mongodb',
-//   transform: {
-//     '.+\\.ts$': 'ts-jest'
-//   }
-// }
-
 module.exports = {
-  roots: ['<rootDir>/tests'],
-  collectCoverageFrom: [
-    '<rootDir>/src/**/*.ts',
-    '!<rootDir>/src/main/**',
-  ],
+  root: ['<rootDir>/src'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
   preset: '@shelf/jest-mongodb',
   transform: {
     '.+\\.ts$': 'ts-jest'
-  },
+  }
 }
+
+// module.exports = {
+//   roots: ['<rootDir>/tests'],
+//   collectCoverageFrom: [
+//     '<rootDir>/src/**/*.ts',
+//     '!<rootDir>/src/main/**',
+//   ],
+//   coverageDirectory: 'coverage',
+//   testEnvironment: 'node',
+//   preset: '@shelf/jest-mongodb',
+//   transform: {
+//     '.+\\.ts$': 'ts-jest'
+//   },
+// }
 
 
 // import type {Config} from 'jest';
